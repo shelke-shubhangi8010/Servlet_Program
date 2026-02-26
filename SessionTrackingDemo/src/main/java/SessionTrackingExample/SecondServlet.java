@@ -1,6 +1,4 @@
 package SessionTrackingExample;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,18 +6,20 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
- * Servlet implementation class FirstServlet
+ * Servlet implementation class SecondServlet
  */
-@WebServlet("/FirstServlet")
-public class FirstServlet extends HttpServlet{
+@WebServlet("/SecondServlet")
+public class SecondServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FirstServlet() {
+    public SecondServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class FirstServlet extends HttpServlet{
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-/*	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -36,29 +36,28 @@ public class FirstServlet extends HttpServlet{
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 		
-		
 		try {
+			
 			response.setContentType("text/html");
-			PrintWriter pw =response.getWriter();
+			PrintWriter p = response.getWriter();
 			
-			String n= request.getParameter("username");
-			pw.print("welcome "+n);
+			Cookie  ck[] = request.getCookies();
+			p.println("Hello    "+ck[0].getValue() +"   Thank You For visiting");
+			p.close();
 			
-			Cookie ck= new Cookie ("uname",n);
-			response.addCookie(ck);
-			
-			pw.print("<form action = 'SecondServlet method' method='post'>");
-			pw.print("<input type='submit' value='visit'>");
-			pw.print("</form>");
-			pw.close();
 			
 		}catch(Exception e) 
 		{
 			System.out.println(e);
 		}
+		
+		
+		
+		
+		
 		
 	}
 
