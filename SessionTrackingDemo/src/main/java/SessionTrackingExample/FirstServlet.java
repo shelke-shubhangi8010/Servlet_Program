@@ -37,7 +37,7 @@ public class FirstServlet extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doGet(request, response);
+		//doGet(request, response);
 		
 		
 		try {
@@ -50,7 +50,7 @@ public class FirstServlet extends HttpServlet{
 			Cookie ck= new Cookie ("uname",n);
 			response.addCookie(ck);
 			
-			pw.print("<form action = 'SecondServlet method' method='post'>");
+			pw.print("<form action = 'SecondServlet' method='post'>");
 			pw.print("<input type='submit' value='visit'>");
 			pw.print("</form>");
 			pw.close();
