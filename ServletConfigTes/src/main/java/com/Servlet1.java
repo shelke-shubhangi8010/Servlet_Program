@@ -1,18 +1,21 @@
 package com;
 
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
  * Servlet implementation class Servlet1
  */
-//@WebServlet("/Servlet1")
+@WebServlet("/Servlet1")
 public class Servlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,15 +36,33 @@ public class Servlet1 extends HttpServlet {
 		
 		response.setContentType("text/html");
 		PrintWriter p=response.getWriter();
+	
+		String n= request.getParameter("uname");
+		System.out.println("welcome"+n);
+		request.setAttribute("surname", "patil");
 		
-		ServletConfig sc=getServletConfig();
-		String n=sc.getInitParameter("MyName");
+		//request.getRequestDispatcher("Servlet2").forward(request, response);
 		
+		// session scope
 		
-		p.println("Your init parameter is: "+n );
-		p.close();
+		HttpSession session = request.getSession();
+		session.setAttribute("dname", "admin");
+		
+		// application scope
+		
+		ServletContext context = getServletContext();
+		context.setAttribute("sname", "riya");
+		
+		request.getRequestDispatcher("Servlet2").forward(request, response);
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
